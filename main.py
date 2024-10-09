@@ -1,4 +1,5 @@
 from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import StandardScaler
 import numpy as np 
 import pandas as pd
 data = pd.read_csv(r'c:/Users/kawthar/Downloads/train.csv')
@@ -24,8 +25,16 @@ le6 = LabelEncoder()
 y=le6.fit_transform(y)
 print(x)
 print(y)
-
-
-
-
-
+#feature scaling
+sc = StandardScaler()
+x = sc.fit_transform(x)
+print(x)
+#Training Model
+from sklearn.ensemble import RandomForestClassifier
+classifier = RandomForestClassifier(n_estimators = 100,random_state=0)
+classifier.fit(x,y)
+score=classifier.score(x,y)
+print(score)
+y_pred = classifier.predict(x)
+y_pred = le6.inverse_transform(y_pred)
+print (y_pred)
