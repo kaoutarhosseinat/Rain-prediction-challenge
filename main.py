@@ -9,6 +9,7 @@ x=data.iloc[:,[2,3,4,5,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22]].values
 y=data.iloc[:,-1].values
 y=y.reshape(-1,1)
 y=data.iloc[:,-1].values
+#encoding data
 le1 = LabelEncoder()
 x[:,0] = le1.fit_transform(x[:,0])
 le2 = LabelEncoder()
