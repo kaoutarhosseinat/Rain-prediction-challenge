@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 #importing dataset
 data = pd.read_csv(r'c:/Users/kawthar/Downloads/train.csv')
+
 print(data.columns)
 print(data.head())
 print(data.isnull().sum())
