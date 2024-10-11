@@ -85,20 +85,29 @@ y_pred = classifier.predict(x_test)
 f1 = f1_score(y_test, y_pred, pos_label=1)
 print(f1)
 
-y_pred = le6.inverse_transform(y_pred)
-y_test = le6.inverse_transform(y_test)
+
 
 
 print(y_pred) 
 print(y_test)  
 
-y_pred = y_pred.reshape(-1, 1)
-y_test = y_test.reshape(-1, 1)
-df = np.concatenate((y_test, y_pred), axis=1)
-dataframe = pd.DataFrame(df, columns=['rain tomorrow', 'prediction'])
+y_pred_labels = le6.inverse_transform(y_pred)
+y_test_labels = le6.inverse_transform(y_test)
+
+df = np.concatenate((y_test.reshape(-1, 1), y_pred.reshape(-1, 1)), axis=1)
+dataframe = pd.DataFrame(df, columns=['rain tomorrow (encoded)', 'prediction (encoded)'])
+
 print(dataframe.head())
 print(dataframe) 
 
+submission = pd.DataFrame({
+    'day': np.arange(len(y_pred_labels)),
+    'rain tomorrow': y_pred_labels  
+})
+
+
+submission.to_csv('submission.csv', index=False)
+print(submission.head())
 
 
 
